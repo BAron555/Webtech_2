@@ -1,0 +1,65 @@
+<div class="container-fluid">
+  <div class="card-body">
+    <h5 class="card-title">{{user.companyname}}</h5>
+    <p class="card-text">ID: {{user.id}}</p>
+    <p class="card-text">Képviselő: {{user.delegatename}}</p>
+    <p class="card-text">Aktuális egyenleg: {{user.balance}}</p>
+    <p class="card-text">Vállalat száma {{user.companynumber}}</p>
+    <p class="card-text">Adószám: {{user.taxnumber}}</p>
+    <p class="card-text">Megyeszékhely: {{user.headquarters}}</p>
+
+  </div>
+  <div>
+    <form [formGroup]="billForm" (ngSubmit)="onSubmit()">
+      <label class="col-form-label">Szűrés dátum szerint:</label><br>
+      <span>
+        <label class="col-form-label">Kezdő dátum:</label>
+        <input class="input-group-lg" type="date" formControlName="start">
+      </span>
+
+      <span>
+        <label class="col-form-label">Vége dátum</label>
+        <input type="date" formControlName="end">
+      </span>
+      <span class="w-25 p-3"><button class="btn btn-dark">Keresés</button></span>
+
+    </form>
+  </div>
+  <table [hidden]="submitted" class="table">
+    <thead>
+    <tr>
+      <th scope="col">Számlák</th>
+      <th scope="col">Tranzakció neve</th>
+      <th scope="col">Dátum</th>
+      <th scope="col">összeg</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let bills of user.bills;  let i = index">
+      <th scope="row">{{i+1}}</th>
+      <td>{{bills.transactionname}}</td>
+      <td>{{bills.date}}</td>
+      <td>{{bills.amount}}</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <table [hidden]="!submitted" class="table">
+    <thead>
+    <tr>
+      <th scope="col">cucc</th>
+      <th scope="col">Tranzakció neve</th>
+      <th scope="col">Dátum</th>
+      <th scope="col">összeg</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let bills of bills;  let i = index">
+      <th scope="row">{{i+1}}</th>
+      <td>{{bills.transactionname}}</td>
+      <td>{{bills.date}}</td>
+      <td>{{bills.amount}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
